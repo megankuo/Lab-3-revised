@@ -12,7 +12,7 @@ function addFavoriteMovie(movieName) {
 function printFavoriteMovies() {
 	if (favoriteMovies.length == 0) {
 		console.log("You have no favorite movies.");
-	} if else (favoriteMovies.length == 1) {
+	} else if (favoriteMovies.length == 1) {
 		console.log("You have 1 favorite movie. It is: " + favoriteMovies);
 	} else {
 		console.log("You have " + favoriteMovies.length + " favorite movies. They are: ");
