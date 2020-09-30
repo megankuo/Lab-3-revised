@@ -1,6 +1,6 @@
 // Determine if input year is a leap year
 function isLeapYear(year) {
-    return (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0);
+    return ( year % 4 === 0 && year % 100 !== 0 || year % 400 === 0 );
 }
 
 // Convert month to a month code
@@ -38,14 +38,14 @@ function getMonthCode(month, year) {
             console.log('Invalid month input');
     }
     // Special cases to month codes
-    if ( (year >= 1600 && year < 1700) || (year >= 2000 && year < 2100) ) {
+    if ( ( year >= 1600 && year < 1700 ) || ( year >= 2000 && year < 2100 ) ) {
         code += 6;
-    } else if ( (year >= 1700 && year < 1800) || (year >= 2100 && year < 2200) ) {
+    } else if ( ( year >= 1700 && year < 1800 ) || ( year >= 2100 && year < 2200 ) ) {
         code += 4;
-    } else if (year >= 1800 && year < 1900) {
+    } else if ( year >= 1800 && year < 1900 ) {
         code += 2;
     }
-    if (isLeapYear(year) && (month.toUpperCase() === 'JAN' || month.toUpperCase() === 'FEB')) {
+    if ( isLeapYear(year) && ( month.toUpperCase() === 'JAN' || month.toUpperCase() === 'FEB' ) ) {
         code -= 1;
     }
     return code;
@@ -58,15 +58,15 @@ function getDayOfTheWeek(year, month, day) {
     // Identify month code
     const monthCode = getMonthCode(month, year);
     // Algorithm to determine what day of the week a given date is
-    const weekdayCode1 = Math.floor(yy/12);
-    const weekdayCode2 = yy - weekdayCode1 * 12;
-    const weekdayCode3 = Math.floor(weekdayCode2/4);
-    const weekdayCode = (weekdayCode1 + weekdayCode2 + weekdayCode3 + day + monthCode) % 7;
+    const weekdayCode_1 = Math.floor(yy / 12);
+    const weekdayCode_2 = yy - weekdayCode_1 * 12;
+    const weekdayCode_3 = Math.floor(weekdayCode_2 / 4);
+    const weekdayCode = ( weekdayCode_1 + weekdayCode_2 + weekdayCode_3 + day + monthCode ) % 7;
     const weekdays = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const monthsWith30Days = ['APR', 'JUN', 'SEP', 'NOV'];
-    if (monthsWith30Days.includes(month.toUpperCase()) && day > 30) {
+    if ( ( monthsWith30Days.includes(month.toUpperCase() ) && day > 30 ) || ( !monthsWith30Days.includes(month.toUpperCase() ) && day > 31) ) {
         return 'Invalid date entered: Error 1';
-    } else if (month.toUpperCase() === 'FEB' && (!isLeapYear(year) && day > 28 || (isLeapYear(year) && day > 29)))
+    } else if ( month.toUpperCase() === 'FEB' && ( !isLeapYear(year) && day > 28 || (isLeapYear(year) && day > 29) ) )
         return 'Invalid date entered: Error 2';
     else {
         return weekdays[weekdayCode];
@@ -78,8 +78,8 @@ function makeCalendar() {
     const year = 2020;
     const month_days = [1, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const months = [1, 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    for (i = 1; i < 13; i++) {
-        for (j = 1; j <= month_days[i]; j++) {
+    for ( i = 1; i < 13; i++ ) {
+        for ( j = 1; j <= month_days[i]; j++ ) {
             let dayOfWeek = getDayOfTheWeek(year, months[i], j);
             console.log(i + "-" + j + "-" + year + " is a " + dayOfWeek + ".");
         }
@@ -100,4 +100,6 @@ function makeCalendar(year) {
 }
 */
 
-module.exports = {makeCalendar, getDayOfTheWeek};
+module.exports = {
+    makeCalendar, getDayOfTheWeek
+};
