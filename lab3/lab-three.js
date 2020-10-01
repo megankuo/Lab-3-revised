@@ -8,13 +8,13 @@ function isValidDate(year, month, day) {
     const inputMonth = month.toUpperCase();
     const monthsWith30Days = ['APR', 'JUN', 'SEP', 'NOV'];
     const monthsWith31Days = ['JAN', 'MAR', 'MAY', 'JUL', 'AUG', 'OCT', 'DEC'];
-    if ( monthsWith30Days.includes(inputMonth) && day < 31 && day > 1 ) {
+    if ( monthsWith30Days.includes(inputMonth) && day < 31 && day > 0 ) {
         return true;
-    } else if ( monthsWith31Days.includes(inputMonth) && day < 32 && day > 1 ) {
+    } else if ( monthsWith31Days.includes(inputMonth) && day < 32 && day > 0 ) {
         return true;
-    } else if ( isLeapYear(year) && day < 30 && day > 1  ) {
+    } else if ( isLeapYear(year) && day < 30 && day > 0  ) {
         return true;
-    } else if ( !isLeapYear(year) && day < 29 && day > 1  ) {
+    } else if ( !isLeapYear(year) && day < 29 && day > 0  ) {
         return true;
     } else {
         return false;
