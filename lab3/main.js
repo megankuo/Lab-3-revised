@@ -1,30 +1,28 @@
 const { question, questionInt } = require('readline-sync');
-const makeCalendar = require('./lab-three').makeCalendar;
-const getDayOfTheWeek = require('./lab-three').getDayOfTheWeek;
+const { makeCalendar, getDayOfTheWeek, isValidDate } = require('./lab-three');
 
 // Asks for user to input a date to return the corresponding weekday
 function getDayOfTheWeekForUserDate() {
     let userInputDay;
     let userInputMonth;
     let userInputYear;
+    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     do {
-        do {
-            userInputYear = questionInt('Please enter the year (yyyy):\n');
-        } while ( typeof(userInputYear) != 'number' );
-        do {
-            userInputMonth = question('Please enter the month (mmm):\n');
-            if ( userInputMonth.length != 3 ) {
-                console.log('Input valid 3 letter month abbreviation, please');
-            }
-        } while ( userInputMonth.length != 3 );
-        do {
-            userInputDay = questionInt('Please enter the day (d/dd):\n');
-            if ( userInputDay > 31 ) {
-                console.log('Input valid date, please');
-            }
-        } while ( typeof(userInputDay) != 'number' || userInputDay > 31 );
-    } while ( typeof(userInputYear) != 'number' || userInputMonth.length != 3 || typeof(userInputDay) != 'number' );
-    console.log( getDayOfTheWeek( userInputYear, userInputMonth, userInputDay ) );
+        userInputYear = questionInt('Enter the year (yyyy):\n');
+    } while ( userInputYear < 0 );
+    do {
+        userInputMonth = question('Enter the month (mmm):\n').toUpperCase();
+        if ( !months.includes(userInputMonth) ) {
+            console.log('Input valid 3 letter month abbreviation, please');
+        }
+    } while ( !months.includes(userInputMonth) );
+    do {
+        userInputDay = questionInt('Enter the day (d/dd):\n');
+        if ( !isValidDate(userInputYear, userInputMonth, userInputDay) ) {
+            console.log('Input valid day, please');
+        }
+    } while ( !isValidDate(userInputYear, userInputMonth, userInputDay) );
+    console.log( userInputDay + "-" + userInputMonth + "-" + userInputYear + " is a " + getDayOfTheWeek( userInputYear, userInputMonth, userInputDay ) );
 }
 
 makeCalendar();
