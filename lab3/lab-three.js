@@ -81,13 +81,10 @@ function getDayOfTheWeek(year, month, day) {
     const weekdayCode_3 = Math.floor(weekdayCode_2 / 4);
     const weekdayCode = ( weekdayCode_1 + weekdayCode_2 + weekdayCode_3 + day + monthCode ) % 7;
     const weekdays = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-    const monthsWith30Days = ['APR', 'JUN', 'SEP', 'NOV'];
-    if ( ( monthsWith30Days.includes(month.toUpperCase() ) && day > 30 ) || ( !monthsWith30Days.includes(month.toUpperCase() ) && day > 31) ) {
-        return 'Invalid date entered: Error 1';
-    } else if ( month.toUpperCase() === 'FEB' && ( !isLeapYear(year) && day > 28 || (isLeapYear(year) && day > 29) ) )
-        return 'Invalid date entered: Error 2';
-    else {
+    if ( isValidDate(year, month, day) ) {
         return weekdays[weekdayCode];
+    } else {
+        console.log('Unable to determine week day');
     }
 }
 
@@ -104,20 +101,6 @@ function makeCalendar() {
     }
 }
 
-/*
-//Prints out the date and day of the week for each day in the input year
-function makeCalendar(year) {
-    for (d = new Date(year, 0, 1); d <= new Date(year, 11, 31) ; d.setDate(d.getDate() + 1)) {
-        let month = d.getMonth() + 1;
-        let date = d.getDate();
-        let year = d.getFullYear();
-        let weekdayArray = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        let weekday = weekdayArray[d.getDay()];
-        console.log(`${month}-${date}-${year} is a ${weekday}.`)
-    }
-}
-*/
-
 module.exports = {
-    makeCalendar, getDayOfTheWeek, isLeapYear,
+    makeCalendar, getDayOfTheWeek, isValidDate,
 }
